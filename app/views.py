@@ -180,7 +180,21 @@ def ACMGVariants():
 @app.route('/user/otherHealthVariants')
 def otherHealthVariants():
 	print 'Other Health Variants'
-	return redirect(url_for('user', user = g.user, nickname = g.user.nickname))
+	GeneCardsFile = open('GeneCardsList.txt', 'r')
+	GeneCardsGenes = GeneCardsFile.read().split('\n')
+	user=g.user
+	allVariants = user.mutations.all()
+	GeneCardsVars = []
+	for var in allVariants:
+		for gene in GeneCardsGenes:
+			if gene.find(str(var.gene)) != -1:
+				if GeneCardsVars.count(gene) == 0:
+					#print gene
+					GeneCardsVars.append(gene)
+	print '@@@@@@ GeneCardsVars'
+	print GeneCardsVars
+	return render_template('GeneCardsVars.html', GeneCardsVars = GeneCardsVars)
+	#return redirect(url_for('user', user = g.user, nickname = g.user.nickname))
 
 @login_required
 @app.route('/user/otherVariants')
