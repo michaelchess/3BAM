@@ -14,22 +14,22 @@ RET	Multiple endocrine neoplasia type 2
 RET	Familial medullary thyroid cancer
 PTEN	PTEN hamartoma tumor syndrome
 RB1	Retinoblastoma
-SDHD	Hereditary paraganglioma–pheochromocytoma syndrome
-SDHAF2	Hereditary paraganglioma–pheochromocytoma syndrome
-SDHC	Hereditary paraganglioma–pheochromocytoma syndrome
-SDHB	Hereditary paraganglioma–pheochromocytoma syndrome
+SDHD	Hereditary paraganglioma-pheochromocytoma syndrome
+SDHAF2	Hereditary paraganglioma-pheochromocytoma syndrome
+SDHC	Hereditary paraganglioma-pheochromocytoma syndrome
+SDHB	Hereditary paraganglioma-pheochromocytoma syndrome
 TSC1	Tuberous sclerosis complex
 TSC2	Tuberous sclerosis complex
-WT1	WT1-related Wilms tumor
+WT1	WT1related Wilms tumor
 NF2	Neurofibromatosis type 2
-COL2A1	Ehlers–Danlos syndrome, vascular type
-FBN1	Marfan syndrome, Loeys–Dietz syndromes, and familial thoracic aortic aneurysms and dissections
-TGFBR1	Marfan syndrome, Loeys–Dietz syndromes, and familial thoracic aortic aneurysms and dissections
-TGFBR2	Marfan syndrome, Loeys–Dietz syndromes, and familial thoracic aortic aneurysms and dissections
-SMAD3	Marfan syndrome, Loeys–Dietz syndromes, and familial thoracic aortic aneurysms and dissections
-ACTA2	Marfan syndrome, Loeys–Dietz syndromes, and familial thoracic aortic aneurysms and dissections
-MYLK	Marfan syndrome, Loeys–Dietz syndromes, and familial thoracic aortic aneurysms and dissections
-MYH11	Marfan syndrome, Loeys–Dietz syndromes, and familial thoracic aortic aneurysms and dissections
+COL2A1	EhlersDanlos syndrome, vascular type
+FBN1	Marfan syndrome, Loeys-Dietz syndromes, and familial thoracic aortic aneurysms and dissections
+TGFBR1	Marfan syndrome, Loeys-Dietz syndromes, and familial thoracic aortic aneurysms and dissections
+TGFBR2	Marfan syndrome, Loeys-Dietz syndromes, and familial thoracic aortic aneurysms and dissections
+SMAD3	Marfan syndrome, Loeys-Dietz syndromes, and familial thoracic aortic aneurysms and dissections
+ACTA2	Marfan syndrome, Loeys-Dietz syndromes, and familial thoracic aortic aneurysms and dissections
+MYLK	Marfan syndrome, Loeys-Dietz syndromes, and familial thoracic aortic aneurysms and dissections
+MYH11	Marfan syndrome, Loeys-Dietz syndromes, and familial thoracic aortic aneurysms and dissections
 MYBPC3	Hypertrophic cardiomyopathy, dilated cardiomyopathy
 MYH7	Hypertrophic cardiomyopathy, dilated cardiomyopathy
 TNNT2	Hypertrophic cardiomyopathy, dilated cardiomyopathy
@@ -47,9 +47,9 @@ DSP	Arrhythmogenic right-ventricular cardiomyopathy
 DSC2	Arrhythmogenic right-ventricular cardiomyopathy
 TMEM43	Arrhythmogenic right-ventricular cardiomyopathy
 DSG2	Arrhythmogenic right-ventricular cardiomyopathy
-KCNQ1	Romano–Ward long QT syndrome types 1, 2, and 3, Brugada syndrome
-KCNH2	Romano–Ward long QT syndrome types 1, 2, and 3, Brugada syndrome
-SCN5A	Romano–Ward long QT syndrome types 1, 2, and 3, Brugada syndrome
+KCNQ1	Romano-Ward long QT syndrome types 1, 2, and 3, Brugada syndrome
+KCNH2	Romano-Ward long QT syndrome types 1, 2, and 3, Brugada syndrome
+SCN5A	Romano-Ward long QT syndrome types 1, 2, and 3, Brugada syndrome
 LDLR	Familial hypercholesterolemia
 APOB	Familial hypercholesterolemia
 PKCSK9	Familial hypercholesterolemia

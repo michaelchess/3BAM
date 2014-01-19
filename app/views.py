@@ -32,7 +32,7 @@ def index():
     if g.user is not None and g.user.is_authenticated():
         return redirect(url_for('user', user = user, nickname = user.nickname))
     else:
-    	return render_template('index.html')
+    	return render_template('main_banner.html')
 
 
 @app.route('/login', methods = ['GET', 'POST'])
@@ -86,7 +86,7 @@ def user(nickname):
         return redirect(url_for('index'))
     user = g.user
     
-    return render_template('user.html', user = user, posts = user.posts, genomeInfo = None, loggedInAs = g.user.nickname)
+    return render_template('user.html', user = user, variants = user.mutations.all(), genomeInfo = None, loggedInAs = g.user.nickname)
 
 
 @app.route('/upload', methods=['GET', 'POST'])
@@ -147,7 +147,7 @@ def uploadGenome():
 		print 'MUTATIONS AFTER ADDING'
 		print user.mutations.all()
 		'''
-		return render_template('user.html', user = user, posts = user.posts, genomeInfo = mutInfo, loggedInAs = g.user.nickname)
+		return render_template('user.html', user = user, variants = user.mutations.all(), genomeInfo = mutInfo, loggedInAs = g.user.nickname)
 
 @login_required
 @app.route('/user/home')
@@ -159,7 +159,22 @@ def home():
 @app.route('/user/ACMGVariants')
 def ACMGVariants():
 	print 'ACMG Variants'
-	return redirect(url_for('user', user = g.user, nickname = g.user.nickname))
+	ACMGGenesFile = open('mandatoryReporting.txt', 'r')
+	ACMGGenes = ACMGGenesFile.read().split('\n')
+	user = g.user
+	allVariants = user.mutations.all()
+	ACMGVars = []
+	for var in allVariants:
+		for gene in ACMGGenes:
+			if gene.find(str(var.gene)) != -1:
+				if ACMGVars.count(gene) <= 0:
+					print gene
+					#print var
+					ACMGVars.append(gene)
+	print '$$$$$ ACMGVars'
+	print ACMGVars
+	return render_template('ACMGVariants.html', ACMGVars = ACMGVars)
+	#return redirect(url_for('user', user = g.user, nickname = g.user.nickname))
 
 @login_required
 @app.route('/user/otherHealthVariants')
