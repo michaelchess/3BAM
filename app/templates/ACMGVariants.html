@@ -13,9 +13,18 @@
 			<p></p>
 			<h3>The Variants:</h3>
 			{% if ACMGVars != None: %}
-				{% for var in ACMGVars: %}
-					<p>{{var}}</p>
-				{% endfor %}
+				<table border="1" class="sortable table table-striped">
+					<tr>
+						<td><b>Gene</b></td>
+						<td><b>Associated Disease(s)</b></td>
+					</tr>
+					{% for var in ACMGVars: %}
+						<tr>
+							<td>{{var[0]}}</td>
+							<td>{{var[1]}}</td>
+						</tr>
+					{% endfor %}
+				</table>
 			{% endif %}
 		</div>
 	</div>

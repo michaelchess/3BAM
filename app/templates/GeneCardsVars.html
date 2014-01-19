@@ -12,9 +12,19 @@
 			<p></p>
 			<h3>The Variants:</h3>
 			{% if GeneCardsVars != None: %}
-				{% for var in GeneCardsVars: %}
-					<p>{{var}}</p>
-				{% endfor %}
+				<table border="1" class="sortable table table-striped">
+					<tr>
+						<td><b>Gene</b></td>
+						<td><b>Extended Gene Name</b></td>
+						<td><b>Associated Disorders</b></td>
+					{% for var in GeneCardsVars: %}
+						<tr>
+							<td>{{var[0]}}</td>
+							<td>{{var[1]}}</td>
+							<td>{{var[3]}}</td>
+						</tr>
+					{% endfor %}
+				</table>
 			{% endif %}
 		</div>
 	</div>

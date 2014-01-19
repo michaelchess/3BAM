@@ -119,34 +119,6 @@ def uploadGenome():
 				mutation = models.Mutation(locus=mutParts[0], geneLoci=geneInfo[0], gene=geneInfo[1], author = user)
 				db.session.add(mutation)
 		db.session.commit()
-			
-		'''
-		command = "pseq "+dataName+" v-view"
-		args = command.split()
-		output = subprocess.Popen(args, stdout=subprocess.PIPE, shell=False)
-		dout, derr = output.communicate()
-		genomeInfo = dout.split('\n')
-		db.session.rollback()
-		for mutation in genomeInfo:
-			#print 'mutation: '
-			#print mutation
-			mutParts = mutation.split()
-			if len(mutParts) > 1:
-				print 'mutParts :'
-				print mutParts
-				locus = mutParts[0].split(':')
-				#print "locus: "
-				#print locus
-				chrNum=locus[0].split('chr')[1]
-				mut = models.Mutation(chromosome=chrNum, variant_ID=mutParts[1], base_position=locus[1], ref_alt_allele=mutParts[2], sample_file_identifier=mutParts[3], num_samples_observed_in=mutParts[4], author = user)
-				p = models.Post(body=mutParts[3], timestamp=datetime.datetime.utcnow(), author=user)
-				db.session.add(p)
-				print 'the mut'
-				print mut
-		db.session.commit()
-		print 'MUTATIONS AFTER ADDING'
-		print user.mutations.all()
-		'''
 		return render_template('user.html', user = user, variants = user.mutations.all(), genomeInfo = mutInfo, loggedInAs = g.user.nickname)
 
 @login_required
@@ -167,10 +139,11 @@ def ACMGVariants():
 	for var in allVariants:
 		for gene in ACMGGenes:
 			if gene.find(str(var.gene)) != -1:
-				if ACMGVars.count(gene) <= 0:
-					print gene
+				if ACMGVars.count(gene.split('\t')) == 0:
+					#print ACMGVars.count(gene)
+					#print gene
 					#print var
-					ACMGVars.append(gene)
+					ACMGVars.append(gene.split('\t'))
 	print '$$$$$ ACMGVars'
 	print ACMGVars
 	return render_template('ACMGVariants.html', ACMGVars = ACMGVars)
@@ -188,10 +161,13 @@ def otherHealthVariants():
 	for var in allVariants:
 		for gene in GeneCardsGenes:
 			if gene.find(str(var.gene)) != -1:
-				if GeneCardsVars.count(gene) == 0:
+				if GeneCardsVars.count(gene.split('\t')) == 0:
 					#print gene
-					GeneCardsVars.append(gene)
+					GeneCardsVars.append(gene.split('\t'))
 	print '@@@@@@ GeneCardsVars'
+	
+	#for line in GeneCardsVars:
+	#	line = line.split('\t')
 	print GeneCardsVars
 	return render_template('GeneCardsVars.html', GeneCardsVars = GeneCardsVars)
 	#return redirect(url_for('user', user = g.user, nickname = g.user.nickname))
