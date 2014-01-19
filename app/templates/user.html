@@ -1,0 +1,28 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+{% block content %}
+	<div class="row">
+		<div class="col-1 col-sm-1 col-lg-1">
+		</div>
+		<div class="col-11 col-sm-11 col-lg-11">
+			{% if posts != None: %}
+			{% if genomeInfo == None: %}
+				<h3>Now that you have created an account you can upload your genome scan for analysis.</h3>
+				<form action="{{ url_for('uploadGenome') }}" enctype="multipart/form-data" method="POST" class=uploadGenome>
+					<div class="form-Group">
+					<dd><label for="file">If you want to learn more about your genome, upload your file here:</label>
+					<dd><input type="file" id="file" name="userGenome">
+					<dd><input type="submit" class="btn btn-default btn-xs" value="Submit">		
+					</div>
+				</form>
+			{% else: %}
+				<h3>Your genome has been successfully uploaded. You can now view your results via the links below or the tabs above.</h3>
+				
+				{% for mutation in genomeInfo:%}
+					<p>{{mutation}}</p>
+				{% endfor %}
+			{% endif %}
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,53 @@
+<html>
+  <head>
+    {% if title %}
+    <title>{{title}} - microblog</title>
+    {% else %}
+    <title>microblog</title>
+    {% endif %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	<!--<style src="file:///Users/michaelchess/Downloads/dist/css/bootstrap.css"></style>
+	<script src="file:///Users/michaelchess/Documents/jquery.min.js"></script>
+	<script src="file:///Users/michaelchess/Downloads/dist/js/bootstrap.min.js"></script>-->
+  </head>
+  <body>
+    <div class="row">
+		<div class="col-11 col-sm-11 col-lg-11">
+			<h1 style="text-align:center">Three Billion and Me</h1>
+		</div>
+		<div class="col-1 col-sm-1 col-lg-1">
+			<p></p>
+			<button type="button" class="btn btn-default btn-xs" onclick="location.href='{{url_for('logout')}}'">Log Out</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12 col-sm-12 col-lg-12">
+			<p style="text-align:center">Three Billion and Me is a new web application for people who have had their whole genomes scanned
+			to find out what can be known from that information.</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12 col-sm-12 col-lg-12">
+			<nav class="navbar navbar-default" role="navigation">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Your Information</a>
+				</div>
+				<div class="collapse navbar-collapse navbar-ex1-collapse">
+					<ul class="nav navbar-nav">
+						<p class="navbar-text">Signed in as: Michael</p>
+						<li class="active"><a href="{{url_for('home')}}">Home</a></li>
+						<li><a href="{{url_for('healthVariants')}}">Clinically Important Variants</a></li>
+						<li><a href="{{url_for('otherRareVariants')}}">Health Related Variants</a></li>
+						<li><a href="{{url_for('ethnicInfo')}}">Other Variants</a></li>
+						<li><a href="{{url_for('about')}}">About</a></li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</div>
+	{% block content %}{% endblock %}
+  </body>
+</html>
