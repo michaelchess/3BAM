@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
+	<script>
+		$('.nav a:contains("Clinically")').parent().addClass('active');
+	</script>
 	<div class="row">
 		<div class="col-1 col-sm-1 col-lg-1">
 		</div>
-		<div class="col-11 col-sm-11 col-lg-11">
+		<div class="col-10 col-sm-10 col-lg-10">
 			<h2>Clinically Important Variants:</h2>
 			<h3>The variants displayed on this page are those found in your genome that were included in the
 				<a href="https://www.acmg.net/docs/IF_Statement_Final_7.24.13.pdf">ACMG recommendations for
@@ -26,6 +29,8 @@
 					{% endfor %}
 				</table>
 			{% endif %}
+		</div>
+		<div class="col-1 col-sm-1 col-lg-1">
 		</div>
 	</div>
 {% endblock %}

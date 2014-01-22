@@ -110,16 +110,31 @@ def uploadGenome():
 		oneOut, oneErr = comOneOut.communicate()
 		comTwoOut = subprocess.Popen(commandTwo, stdout=subprocess.PIPE, shell=True)
 		dout, derr = comTwoOut.communicate()
-		mutInfo = dout.split('\n')
+		varInfo = dout.split('\n')
 		print dout
-		for mut in mutInfo:
-			mutParts = mut.split()
-			if mut.find('#')==-1 and len(mutParts)==3:
-				geneInfo = mutParts[2].rsplit(':', 1)
-				mutation = models.Mutation(locus=mutParts[0], geneLoci=geneInfo[0], gene=geneInfo[1], author = user)
-				db.session.add(mutation)
+		for var in varInfo:
+			varParts = var.split()
+			if var.find('#')==-1 and len(varParts)==3:
+				geneInfo = varParts[2].rsplit(':', 1)
+				variant = models.Mutation(locus=varParts[0], geneLoci=geneInfo[0], gene=geneInfo[1], author = user)
+				db.session.add(variant)
 		db.session.commit()
-		return render_template('user.html', user = user, variants = user.mutations.all(), genomeInfo = mutInfo, loggedInAs = g.user.nickname)
+		GeneCardsFile = open('GeneCardsList.txt', 'r')
+		GeneCardsGenes = GeneCardsFile.read().split('\n')
+		user=g.user
+		allVariants = user.mutations.all()
+		GeneCardsVars = []
+		for var in allVariants:
+			for gene in GeneCardsGenes:
+				if gene.find(str(var.gene)) != -1:
+					if GeneCardsVars.count(gene.split('\t')) == 0:
+						GeneCardsVars.append(gene.split('\t'))
+		print '@@@@@@ GeneCardsVars'
+		#print GeneCardsVars
+		user.GeneCardsVariants = GeneCardsVars
+		db.session.commit()
+		print user.GeneCardsVariants
+		return render_template('user.html', user = user, variants = user.mutations.all(), genomeInfo = varInfo, loggedInAs = g.user.nickname)
 
 @login_required
 @app.route('/user/home')
@@ -153,7 +168,9 @@ def ACMGVariants():
 @app.route('/user/otherHealthVariants')
 def otherHealthVariants():
 	print 'Other Health Variants'
-	GeneCardsFile = open('GeneCardsList.txt', 'r')
+	user = g.user
+	GeneCardsVars = user.GeneCardsVariants
+	'''GeneCardsFile = open('GeneCardsList.txt', 'r')
 	GeneCardsGenes = GeneCardsFile.read().split('\n')
 	user=g.user
 	allVariants = user.mutations.all()
@@ -162,8 +179,14 @@ def otherHealthVariants():
 		for gene in GeneCardsGenes:
 			if gene.find(str(var.gene)) != -1:
 				if GeneCardsVars.count(gene.split('\t')) == 0:
-					#print gene
 					GeneCardsVars.append(gene.split('\t'))
+    
+	for gene in GeneCardsGenes:
+		if GeneCardsVars.count(gene.split('Show')[0].split('\t')) == 0:
+			for var in allVariants:
+				if gene.find(str(var.gene)) != -1:
+					#print gene
+					GeneCardsVars.append(gene.split('Show')[0].split('\t'))'''
 	print '@@@@@@ GeneCardsVars'
 	
 	#for line in GeneCardsVars:
@@ -176,7 +199,10 @@ def otherHealthVariants():
 @app.route('/user/otherVariants')
 def otherVariants():
 	print 'Other Variants'
-	return redirect(url_for('user', user = g.user, nickname = g.user.nickname))
+	user = g.user
+	allVars = user.mutations.all()
+	return render_template('AllVariantsPage.html', allVars = allVars)
+	#return redirect(url_for('user', user = g.user, nickname = g.user.nickname))
 
 @login_required
 @app.route('/about')

@@ -34,12 +34,18 @@
 		<div class="col-12 col-sm-12 col-lg-12">
 			<nav class="navbar navbar-default" role="navigation">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="#">Your Information</a>
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainBar">
+      					<span class="sr-only">Toggle navigation</span>
+      					<span class="icon-bar"></span>
+      					<span class="icon-bar"></span>
+      					<span class="icon-bar"></span>
+    				</button>
+					<a class="navbar-brand" href="#">3BAM</a>
 				</div>
-				<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<div class="collapse navbar-collapse navbar-ex1-collapse" id="mainBar">
 					<ul class="nav navbar-nav">
 						<p class="navbar-text">Signed in as: Michael</p>
-						<li class="active"><a href="{{url_for('home')}}">Home</a></li>
+						<li><a href="{{url_for('home')}}">Home</a></li>
 						<li><a href="{{url_for('ACMGVariants')}}">Clinically Important Variants</a></li>
 						<li><a href="{{url_for('otherHealthVariants')}}">Health Related Variants</a></li>
 						<li><a href="{{url_for('otherVariants')}}">Other Variants</a></li>

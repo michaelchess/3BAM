@@ -1,14 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
+	<script>
+		$('.nav a:contains("Health")').parent().addClass('active');
+	</script>
 	<div class="row">
 		<div class="col-1 col-sm-1 col-lg-1">
 		</div>
-		<div class="col-11 col-sm-11 col-lg-11">
+		<div class="col-10 col-sm-10 col-lg-10">
 			<h2>Other Health Variants:</h2>
 			<h3>The variants displayed on this page are those found in your genome that were
 				included in the <a href="http://www.genecards.org/">GeneCards</a> 
 				<a href="http://www.genecards.org/cgi-bin/listdiseasecards.pl?type=full&no_limit=1">
-				list of genes related to disease</a>.
+				list of genes related to disease</a>.  It is also important to note that although
+				some of the variants included in this list do have a causal relationship to disease
+				many do not and some even have a preventative role.  This list is included less as an
+				indication of impending medical problems and more as a way to explore the disease genes
+				possibly related to yourself and your family.  It should not be considered with the same
+				importance as the variants reported on the Clinically Relevant Variants page.
 			<p></p>
 			<h3>The Variants:</h3>
 			{% if GeneCardsVars != None: %}
@@ -26,6 +34,8 @@
 					{% endfor %}
 				</table>
 			{% endif %}
+		</div>
+		<div class="col-1 col-sm-1 col-lg-1">
 		</div>
 	</div>
 {% endblock %}

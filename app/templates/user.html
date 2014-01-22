@@ -1,6 +1,9 @@
 <!-- extend base layout -->
 {% extends "base.html" %}
 {% block content %}
+	<script>
+		$('.nav a:contains("Home")').parent().addClass('active');
+	</script>
 	<div class="row">
 		<div class="col-1 col-sm-1 col-lg-1">
 		</div>

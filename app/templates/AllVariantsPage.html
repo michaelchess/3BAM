@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+	<script>
+		$('.nav a:contains("Other")').parent().addClass('active');
+	</script>
+	<div class="row">
+		<div class="col-1 col-sm-1 col-lg-1">
+		</div>
+		<div class="col-10 col-sm-10 col-lg-10">
+			<h2>All Variants:</h2>
+			<h3>This page displays all of the variants that were included in the VCF file
+				that you uploaded in a more readable format.</h3>
+			<h3>The 'Locus' column shows the genomic coordinates of the variant.  The 'Gene'
+				column shows the name of the gene onto which that variant falls or a '.' if 
+				the variant is not in a gene.  The 'Gene Loci' column shows the gene's range
+				on the genome, if applicable.</h3>
+			<p></p>
+			<h3>The Variants:</h3>
+			{% if allVars != None: %}
+				<table border="1" class="sortable table table-striped">
+					<tr>
+						<td><b>Locus</b></td>
+						<td><b>Gene</b></td>
+						<td><b>Gene Loci</b></td>
+					</tr>
+					{% for var in allVars: %}
+						<tr>
+							<td>{{var.locus}}</td>
+							<td>{{var.gene}}</td>
+							<td>{{var.geneLoci}}</td>
+						</tr>
+					{% endfor %}
+				</table>
+			{% endif %}
+		</div>
+		<div class="col-1 col-sm-1 col-lg-1">
+		</div>
+	</div>
+{% endblock %}
