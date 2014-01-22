@@ -103,7 +103,7 @@ def uploadGenome():
 		user = g.user
 		commandOne = "grep -v \# "+os.path.join(app.config['UPLOAD_FOLDER'], dataName)+" | awk '{OFS=\"\";print \"chr\",$1,\":\",$2}\' > varList"
 		#commandTwo = "pseq . lookup --file varList --loc genes --locdb locdb.genes | grep loc_genes | awk \'$3!=\".\"\'"
-		commandTwo = "pseq . lookup --file varList --loc genes --locdb locdb.genes | grep loc_genes | awk '$3!=\".\"'"
+		commandTwo = "pseq . lookup --file varList --loc genes --locdb locdb.genes | grep loc_genes"# | awk '$3!=\".\"'"
 		#splitComOne = commandOne.split()
 		#splitComTwo = commandTwo.split()
 		comOneOut = subprocess.Popen(commandOne, stdout=subprocess.PIPE, shell=True)
@@ -116,7 +116,10 @@ def uploadGenome():
 			varParts = var.split()
 			if var.find('#')==-1 and len(varParts)==3:
 				geneInfo = varParts[2].rsplit(':', 1)
-				variant = models.Mutation(locus=varParts[0], geneLoci=geneInfo[0], gene=geneInfo[1], author = user)
+				if len(geneInfo) == 1:
+					variant = models.Mutation(locus=varParts[0], geneLoci=geneInfo[0], gene=geneInfo[0], author = user)
+				else:
+					variant = models.Mutation(locus=varParts[0], geneLoci=geneInfo[0], gene=geneInfo[1], author = user)
 				db.session.add(variant)
 		db.session.commit()
 		GeneCardsFile = open('GeneCardsList.txt', 'r')
@@ -125,10 +128,11 @@ def uploadGenome():
 		allVariants = user.mutations.all()
 		GeneCardsVars = []
 		for var in allVariants:
-			for gene in GeneCardsGenes:
-				if gene.find(str(var.gene)) != -1:
-					if GeneCardsVars.count(gene.split('\t')) == 0:
-						GeneCardsVars.append(gene.split('\t'))
+			if var.gene != '.':
+				for gene in GeneCardsGenes:
+					if gene.find(str(var.gene)) != -1:
+						if GeneCardsVars.count(gene.split('\t')) == 0:
+							GeneCardsVars.append(gene.split('\t'))
 		print '@@@@@@ GeneCardsVars'
 		#print GeneCardsVars
 		user.GeneCardsVariants = GeneCardsVars
@@ -152,13 +156,14 @@ def ACMGVariants():
 	allVariants = user.mutations.all()
 	ACMGVars = []
 	for var in allVariants:
-		for gene in ACMGGenes:
-			if gene.find(str(var.gene)) != -1:
-				if ACMGVars.count(gene.split('\t')) == 0:
-					#print ACMGVars.count(gene)
-					#print gene
-					#print var
-					ACMGVars.append(gene.split('\t'))
+		if var.gene != '.':
+			for gene in ACMGGenes:
+				if gene.find(str(var.gene)) != -1:
+					if ACMGVars.count(gene.split('\t')) == 0:
+						#print ACMGVars.count(gene)
+						#print gene
+						#print var
+						ACMGVars.append(gene.split('\t'))
 	print '$$$$$ ACMGVars'
 	print ACMGVars
 	return render_template('ACMGVariants.html', ACMGVars = ACMGVars)
@@ -208,4 +213,5 @@ def otherVariants():
 @app.route('/about')
 def about():
 	print 'About'
-	return redirect(url_for('user', user = g.user, nickname = g.user.nickname))
+	return render_template('about.html')
+	#return redirect(url_for('user', user = g.user, nickname = g.user.nickname))

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+	<script>
+		$('.nav a:contains("About")').parent().addClass('active');
+	</script>
+	<div class="row">
+		<div class="col-1 col-sm-1 col-lg-1">
+		</div>
+		<div class="col-10 col-sm-10 col-lg-10">
+			<h2>About:</h2>
+			<h4>The idea for Three Billion and Me came over the summer while I was working
+				in the computational genetics lab of Dr. Mark Daly.  I was talking to one of
+				the researchers there, Brett, about my upcoming independent study project when
+				he mentioned that there was a gap in the market for online tools allowing whole
+				genome scan analysis.  This seemed like an awesome thing to do so upon starting
+				school in September I got to work.  The project in its current form provides a
+				straightforward way to understand the information contained in a VCF file.  In
+				just a few quick and easy steps you can check if you have any high risk of disease
+				variants, any disease-implicated variants, and you can see all of your variants laid 
+				out in an easy to read table.</h4>
+			<p>A special thanks to Brett, Doug, Menachem, Shaun, and Mom for giving me pointers
+				and other help.
+		</div>
+		<div class="col-1 col-sm-1 col-lg-1">
+		</div>
+	</div>
+{% endblock %}
